@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Swagger API | "Say Hello" Template 
+  version: 0.0.1
+  description: >
+    This is a template for swagger-enhanced APIs on Flask.
+paths:
+  /say_hello:
+    post:
+      tags:
+        - Greetings
+      summary: Say hello to someone
+      description: >
+        It actually just greets someone, if she has a name.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: the person's name
+                  required: true
+                useless_file:
+                  type: string
+                  format: binary
+                  description: loading a file here it is useless (but you can make it useful)
+                  required: false
+      responses:
+        '200':
+          description: Result Json.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Speech'
+servers:
+  - url: 'http://localhost:8899'
+
+security: []
+
+
+components:
+  schemas:
+    Speech:
+      type: object
+      properties:
+        message:
+          type: string
